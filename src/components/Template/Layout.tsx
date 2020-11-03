@@ -1,26 +1,33 @@
 import React from "react";
+import Router from "next/router";
+import { useCookies, Cookies } from "react-cookie";
 
 export const Content = ({ children }) => {
-  return (
-    <div
-      style={{ marginLeft: "320px", width: "calc(100% - 320px)" }}
-      className="p-10"
-    >
-      {children}
-    </div>
-  );
+  return <div className="p-8 ml-0 md:ml-72 w-full">{children}</div>;
 };
 
 export const NavSide = ({ data }) => {
+  const cookie = new Cookies();
+
+  const logout = async (e) => {
+    e.preventDefault();
+    localStorage.clear();
+    cookie.remove("userId");
+    Router.push("/");
+  };
+
   return (
     <div
       className="bg-indigo-500 hidden md:block p-5 fixed top-0 left-0"
       style={{ width: "20rem", minHeight: "100vh", maxHeight: "100vh" }}
     >
       <div className="flex w-full">
-        <div className="bg-white shadow p-3 w-full text-center rounded">
-          <h4>Scraping Free</h4>
-        </div>
+        <button
+          className="bg-white hover:bg-red-500 hover:text-white shadow p-3 w-full text-center rounded"
+          onClick={(e) => logout(e)}
+        >
+          <h4>Logout</h4>
+        </button>
       </div>
       <div className="mt-5 flex justify-between items-center">
         <ul>
@@ -44,6 +51,14 @@ export const NavSide = ({ data }) => {
           </li>
         </ul>
       </div>
+    </div>
+  );
+};
+
+export const LoadingScreen = () => {
+  return (
+    <div className="h-screen w-full flex justify-center items-center">
+      <h4>Please Wait.</h4>
     </div>
   );
 };

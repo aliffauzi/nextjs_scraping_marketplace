@@ -1,4 +1,5 @@
 import cookie from "cookie";
+import Router from "next/router";
 import { toast } from "react-toastify";
 
 export function parseCookie(req) {
@@ -10,7 +11,6 @@ export function handleAuth(ctx) {
 
   if (cookie.userId) {
     ctx.res.writeHead(303, { Location: "/home" });
-    ctx.res.finished = true;
     ctx.res.end();
   }
 }

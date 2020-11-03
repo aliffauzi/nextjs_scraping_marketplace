@@ -19,7 +19,7 @@ function Home() {
     e.preventDefault();
     await loginAction(data)
       .then((res: any) => {
-        setCookie("userId", res.data.data_id);
+        setCookie("userId", res.data.data._id);
         localStorage.setItem("userId", res.data.data._id);
         localStorage.setItem("token", res.data.token);
         window.location.href = "/home";
