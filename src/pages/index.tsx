@@ -19,10 +19,10 @@ function Home() {
     e.preventDefault();
     await loginAction(data)
       .then((res: any) => {
-        setCookie("userId", res.data._id);
+        setCookie("userId", res.data.data_id);
         localStorage.setItem("userId", res.data.data._id);
         localStorage.setItem("token", res.data.token);
-        Router.push("/home");
+        window.location.href = "/home";
       })
       .catch((error) => {
         notification(error.response.data.message);
